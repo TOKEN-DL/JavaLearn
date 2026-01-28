@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 引入外部配置文件   -->
+    <properties resource="db.properties">
+        <property name="username" value="root"/>
+        <property name="password" value="rootroot"/>
+
+    </properties>
+
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <!--起别名-->
+    <typeAliases>
+        <typeAlias type="com.token.pojo.Blog" alias="Blog"/>
+        <package name="com.token.pojo"/>
+    </typeAliases>
+
+
+
+    <!--    &lt;!&ndash;    引入properties 文件&ndash;&gt;-->
+<!--    <properties resource="jdbc.properties"/>-->
+
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!-- 数据库连接信息-->
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+
+        <environment id="test">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!-- 数据库连接信息-->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true&amp;characterEncoding=utf8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="rootroot"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper class="com.token.dao.BlogMapper"></mapper>
+
+    </mappers>
+</configuration>
